@@ -33,6 +33,7 @@ function Cart({
   setCartLength,
   AtualizarModalPagina,
   setAtualizarModalPagina,
+  googleApiKey,
 }) {
   const history = useRouter();
 
@@ -177,7 +178,7 @@ function Cart({
       const { data: response } = await Axios.get(
         `https://viacep.com.br/ws/${cep}/json`
       );
-      Geocode.setApiKey(process.env.NEXT_PUBLIC_REACT_APP_GOOGLE_MAPS_API_KEY);
+      Geocode.setApiKey(googleApiKey);
 
       Geocode.setLanguage("pt-br");
 
@@ -531,7 +532,7 @@ function Cart({
 
   async function getCart() {
     setTimeout(2000);
-    const token = localStorage.getItem(process.env.NEXT_PUBLIC_REACT_APP_NAME);
+    const token = localStorage.getItem(mktName);
     try {
       if (token) {
         api.defaults.headers.Authorization = `Bearer ${token}`;
@@ -667,20 +668,16 @@ function Cart({
   useEffect(() => {
     document.body.style.overflow = "auto";
 
-    const token = localStorage.getItem(process.env.NEXT_PUBLIC_REACT_APP_NAME);
+    const token = localStorage.getItem(mktName);
 
     if (
-      localStorage.getItem(
-        `${process.env.NEXT_PUBLIC_REACT_APP_NAME}_location`
-      ) &&
+      localStorage.getItem(`${mktName}_location`) &&
       sessionStorage.getItem("cart")
     ) {
       window.location.href = "/tcart";
       return false;
     } else if (
-      !localStorage.getItem(
-        `${process.env.NEXT_PUBLIC_REACT_APP_NAME}_location`
-      ) &&
+      !localStorage.getItem(`${mktName}_location`) &&
       sessionStorage.getItem("cart")
     ) {
       notification(

@@ -14,6 +14,7 @@ const Cart = () => {
 
   const mktName = process.env.NEXT_PUBLIC_REACT_APP_NAME;
   const appMsLocationUrl = process.env.NEXT_PUBLIC_REACT_APP_MS_LOCATION;
+  const googleApiKey = process.env.NEXT_PUBLIC_REACT_APP_GOOGLE_MAPS_API_KEY;
 
   return (
     <>
